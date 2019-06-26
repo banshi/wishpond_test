@@ -1,30 +1,21 @@
 class PlaysController < ApplicationController
-  before_action :set_play, only: [:update]
-
   def index
     @plays = Play.all
+    @images = ActiveStorage::Blob.order('RANDOM()').first(10)
   end
 
   def create
     @play = Play.new(play_params)
 
-    respond_to do |format|
-      if @play.save
-        format.html { redirect_to @play, notice: 'Play was successfully created.' }
-        format.json { render :show, status: :created, location: @play }
-      else
-        format.html { render :new }
-        format.json { render json: @play.errors, status: :unprocessable_entity }
-      end
+    if @play.save
+      format.json { status: :ok }
+    else
+      format.json { status: :unprocessable_entity }
     end
   end
 
   private
-    def set_play
-      @play = Play.find(params[:id])
-    end
-
     def play_params
-      params.fetch(:play, {})
+      params.require(:play).permit(:timer, :url)
     end
 end

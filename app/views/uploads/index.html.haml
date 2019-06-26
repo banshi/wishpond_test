@@ -1,2 +1,19 @@
-%p#notice= notice
-%h1 Uploads
+= flash_messages
+%h2.mb-5 Choose images to upload
+= form_for :upload, url: uploads_path do |f|
+  .form-group
+    = f.file_field :images, multiple: true
+  .form-group.mb-5
+    = f.submit 'Upload', class: 'btn btn-primary'
+%hr
+- if @images.length.positive?
+  %h2.mb-5
+    Uploaded Images
+  .row
+    - @images.each do |image|
+      .col-3
+        .card.mb-5
+          = image_tag(image, class: 'rounded img-fluid')
+- else
+  %h2
+    No uploaded images for now.
