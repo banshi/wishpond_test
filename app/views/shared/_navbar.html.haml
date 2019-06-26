@@ -1,0 +1,11 @@
+%nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
+  .container
+    = link_to 'Wishpond', root_path, class: 'navbar-brand'
+    %button.navbar-toggler{'aria-controls': 'navbarTogglerMenu', 'aria-expanded': 'false', 'aria-label': 'Toggle navigation', 'data-target': '#navbarTogglerMenu', 'data-toggle': 'collapse', type: 'button'}
+      %span.navbar-toggler-icon
+    #navbarTogglerMenu.collapse.navbar-collapse
+      %ul.navbar-nav.mr-auto
+        %li.nav-item{class: current_page?(uploads_path) ? 'active' : ''}
+          = link_to 'Uploads', uploads_path, class: 'nav-link'
+        %li.nav-item{class: current_page?(plays_path) ? 'active' : ''}
+          = link_to 'Plays', plays_path, class: 'nav-link'
