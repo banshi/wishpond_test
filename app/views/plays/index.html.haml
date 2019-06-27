@@ -1,2 +1,26 @@
-%p#notice= notice
-%h1 Plays
+%h1.mb-5 Plays
+#timer-container.mb-5{ data: { image_urls: @image_urls } }
+  .row
+    .col-3 Current Timer
+    .col-6 Current Image
+    .col-3 Actions
+  .row
+    .col-3.text-center
+      %h1#current-timer 10
+    .col-6.align-self-center
+      - if @images.count.positive?
+        %img.img-responsive.rounded#current-image{height: '200px', src: "#{url_for(@images.first)}"}
+      - else
+        %p.font-weight-bold No images uploaded
+    .col-3.align-self-center
+      %button.btn.btn-primary#save-image{class: (@images.count.positive? ? 'btn-primary' : 'btn-secondary disabled')} Save timer and image
+%hr
+.table-responsive
+  %table.table.table-bordered#plays-table
+    %tr
+      %th Timer
+      %th Image
+    - @plays.each do |play|
+      %tr
+        %td= play.timer
+        %td= image_tag(play.url, height: '200px', class: 'rounded')

@@ -5,7 +5,7 @@
       %span.navbar-toggler-icon
     #navbarTogglerMenu.collapse.navbar-collapse
       %ul.navbar-nav.mr-auto
-        %li.nav-item{class: current_page?(uploads_path) ? 'active' : ''}
+        %li.nav-item{class: if current_page?(uploads_path) || current_page?(root_path) then 'active' else '' end}
           = link_to 'Uploads', uploads_path, class: 'nav-link'
         %li.nav-item{class: current_page?(plays_path) ? 'active' : ''}
           = link_to 'Plays', plays_path, class: 'nav-link'
