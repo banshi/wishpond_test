@@ -9,9 +9,9 @@ class PlaysController < ApplicationController
     @play = Play.new(play_params)
 
     if @play.save
-      render json: { status: :ok }
+      head :ok
     else
-      render json: { status: :unprocessable_entity }
+      render json: {}, status: :unprocessable_entity
     end
   end
 
